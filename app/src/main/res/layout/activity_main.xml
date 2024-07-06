@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/main_linear_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/top_navigation_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="16dp"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/user_profile_button"
+                android:layout_width="75dp"
+                android:layout_height="43dp"
+                android:clickable="true"
+                android:contentDescription="User Profile"
+                android:padding="8dp"
+                android:src="@drawable/user" />
+
+            <HorizontalScrollView
+                android:id="@+id/horizontal_scroll_view"
+                android:layout_width="307dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="300dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp">
+
+                <LinearLayout
+                    android:id="@+id/horizontal_navigation_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/button_home"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:focusable="true"
+                        android:padding="8dp"
+                        android:text="Home"
+                        android:textColor="@android:color/white" />
+
+                    <TextView
+                        android:id="@+id/button_favorites"
+                        android:layout_width="63dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="16dp"
+                        android:focusable="true"
+                        android:padding="8dp"
+                        android:text="Favorites"
+                        android:textColor="@android:color/white" />
+
+                    <TextView
+                        android:id="@+id/button_apps"
+                        android:layout_width="60dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="16dp"
+                        android:focusable="true"
+                        android:padding="8dp"
+                        android:text="Apps"
+                        android:textColor="@android:color/white" />
+
+                    <TextView
+                        android:id="@+id/button_movies"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:focusable="true"
+                        android:padding="8dp"
+                        android:text="Movies"
+                        android:textColor="@android:color/white" />
+
+                    <TextView
+                        android:id="@+id/button_shows"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:focusable="true"
+                        android:padding="8dp"
+                        android:text="Shows"
+                        android:textColor="@android:color/white"
+                        android:visibility="gone" />
+
+
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <ImageButton
+                android:id="@+id/search_button"
+                android:layout_width="64dp"
+                android:layout_height="43dp"
+                android:layout_marginStart="16dp"
+                android:clickable="true"
+                android:contentDescription="Search"
+                android:padding="8dp"
+                android:src="@drawable/search" />
+
+            <ImageView
+                android:id="@+id/settings_button"
+                android:layout_width="51dp"
+                android:layout_height="38dp"
+                android:layout_marginStart="16dp"
+                android:clickable="true"
+                android:contentDescription="Settings"
+                android:padding="8dp"
+                android:src="@drawable/s2" />
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="16dp">
+        </FrameLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

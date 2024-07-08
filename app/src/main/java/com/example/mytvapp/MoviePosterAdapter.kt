@@ -11,9 +11,11 @@ import com.bumptech.glide.Glide
 class MoviePosterAdapter(
     private var movieList: List<com.example.data.model.MovieResult>) : RecyclerView.Adapter<MoviePosterAdapter.PosterViewHolder>() {
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PosterViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_movie_poster, parent, false)
         return PosterViewHolder(view)
+
     }
 
     override fun onBindViewHolder(holder: PosterViewHolder, position: Int) {
@@ -29,8 +31,8 @@ class MoviePosterAdapter(
             context.startActivity(intent)
         }
     }
-
     override fun getItemCount(): Int = movieList.size
+
 
     fun updateMovies(movies: List<com.example.data.model.MovieResult>) {
         this.movieList = movies

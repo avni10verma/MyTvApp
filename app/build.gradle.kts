@@ -95,6 +95,8 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.5.30")
 
     //coroutines
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
+
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0")
     implementation("com.squareup.retrofit2:retrofit:2.9.0")

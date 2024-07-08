@@ -1,24 +1,27 @@
 package com.example.mytvapp
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.data.interfaces.MovieApiService
-import com.example.data.interfaces.RetrofitInstance
 import com.example.data.repository.MovieRepositoryImpl
 
 class SearchFragment : Fragment() {
 
-    private lateinit var searchView: SearchView
+    private lateinit var searchView: EditText
     private lateinit var recyclerViewSearchResults: RecyclerView
     private val movieViewModel: MovieViewModel by viewModels {
-        MovieViewModelFactory(MovieRepositoryImpl(RetrofitInstance.instance.create(MovieApiService::class.java)))
+        MovieViewModelFactory(MovieRepositoryImpl(MovieApiService.create()))
     }
 
     private lateinit var moviePosterAdapter: MoviePosterAdapter
@@ -31,7 +34,7 @@ class SearchFragment : Fragment() {
         searchView = view.findViewById(R.id.search_view)
         recyclerViewSearchResults = view.findViewById(R.id.recycler_view_search_results)
 
-        recyclerViewSearchResults.layoutManager = GridLayoutManager(context, 3) // 3 columns in grid
+        recyclerViewSearchResults.layoutManager = GridLayoutManager(context, 5) // 3 columns in grid
         moviePosterAdapter = MoviePosterAdapter(emptyList())
         recyclerViewSearchResults.adapter = moviePosterAdapter
 
@@ -41,26 +44,27 @@ class SearchFragment : Fragment() {
     }
 
     private fun setupSearchView() {
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                query?.let {
-                    movieViewModel.searchMovies(it)
-                }
-                return false
+        searchView.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // No action needed here
             }
 
-            override fun onQueryTextChange(newText: String?): Boolean {
-                newText?.let {
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                // No action needed here
+
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                s?.let {
+                    Log.d("Check", "${s}")
                     if (it.isNotEmpty()) {
-                        movieViewModel.searchMovies(it)
+                        movieViewModel.searchDebounced(it.toString())
+                        movieViewModel.searchMovies(it.toString()).observe(viewLifecycleOwner) { movies ->
+                            moviePosterAdapter.updateMovies(movies)
+                        }
                     }
                 }
-                return false
             }
         })
-
-        //movieViewModel.searchMovies(query).observe(viewLifecycleOwner) { movies ->
-          //  moviePosterAdapter.updateMovies(movies)
-        //}
     }
 }

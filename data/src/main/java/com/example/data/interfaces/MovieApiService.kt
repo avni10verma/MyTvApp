@@ -8,6 +8,7 @@ import com.example.data.model.SearchResponse
 import com.example.data.model.UpcomingResponse
 import retrofit2.http.GET
 import retrofit2.http.Headers
+import retrofit2.http.Query
 
 interface MovieApiService {
     @Headers("Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjYjU4MTc3M2Q0ZGUzOTc3MzJkNjBhM2UxZTgzNDY5NSIsInN1YiI6IjY1Yjc2ZDI0ODc0MWM0MDE2MzkxZDE2NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.h8T8hpkrQewnzn0cRoKwOlIH_Vg8xrs9my1WVvjNhu0")
@@ -32,7 +33,7 @@ interface MovieApiService {
 
     @Headers("Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjYjU4MTc3M2Q0ZGUzOTc3MzJkNjBhM2UxZTgzNDY5NSIsInN1YiI6IjY1Yjc2ZDI0ODc0MWM0MDE2MzkxZDE2NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.h8T8hpkrQewnzn0cRoKwOlIH_Vg8xrs9my1WVvjNhu0")
     @GET("search/movie")
-    suspend fun searchMovies() : SearchResponse
+    suspend fun searchMovies(@Query("query") query: String) : SearchResponse
 
     companion object {
         fun create(): MovieApiService {

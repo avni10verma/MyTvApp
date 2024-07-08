@@ -17,12 +17,12 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.example.data.interfaces.MovieApiService
 import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 
 
 class MainFragment : Fragment() {
 
         private lateinit var viewPager: ViewPager
-        private lateinit var tabLayout : TabLayout
         private lateinit var containerLayout: LinearLayout
 
         private val movieViewModel: MovieViewModel by viewModels {
@@ -35,10 +35,10 @@ class MainFragment : Fragment() {
         ): View? {
             val view = inflater.inflate(R.layout.fragment_main, container, false)
             viewPager = view.findViewById(R.id.view_pager_movie_banners)
-            tabLayout = view.findViewById(R.id.tabLayout)
             containerLayout = view.findViewById(R.id.container_layout)
             val viewPagerAdapter = ViewPagerAdapter(requireContext(), emptyList())
             viewPager.adapter = viewPagerAdapter
+
 
             // Observe top-rated movies and update ViewPager
             movieViewModel.movies.observe(viewLifecycleOwner, Observer { movies ->
@@ -68,7 +68,7 @@ class MainFragment : Fragment() {
         }
 
         private fun addCategoryView(title: String, movies: List<MovieResult>) {
-            Log.d("Avniiiiiiii", "is greattttt!!!!! ${title}")
+            Log.d("Avniii", "${title}")
 
             movies.map { movie ->
                 Log.d("$title","${movie.title}")
@@ -78,12 +78,18 @@ class MainFragment : Fragment() {
             val textCategoryTitle: TextView = categoryView.findViewById(R.id.text_view_category)
             textCategoryTitle.text = title
 
+
             val recyclerViewPosters: RecyclerView = categoryView.findViewById(R.id.recycler_view_posters)
             recyclerViewPosters.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
             val moviePosterAdapter = MoviePosterAdapter(movies)
             recyclerViewPosters.adapter = moviePosterAdapter
 
+//             Apply item decoration
+ //           val spacing = resources.getDimensionPixelSize(R.dimen.spacing_between_items)
+//            val spacingDecoration = SpacingItemDecoration(spacing)
+//            recyclerViewPosters.addItemDecoration(spacingDecoration)
+//
             containerLayout.addView(categoryView)
         }
     }

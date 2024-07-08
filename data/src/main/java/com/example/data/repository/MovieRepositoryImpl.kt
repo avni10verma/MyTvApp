@@ -1,5 +1,6 @@
 package com.example.data.repository
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.data.interfaces.MovieApiService
@@ -22,8 +23,11 @@ class MovieRepositoryImpl(private val tmdbService: MovieApiService) : MovieRepos
         _movies.postValue(movieResults)
     }
 
+
     override suspend fun searchMovies(query: String): List<MovieResult> {
-        return tmdbService.searchMovies().results
+        val searchResult = tmdbService.searchMovies(query).results
+        Log.d("serachcheck", "{$searchResult}")
+        return  searchResult
     }
 
     private suspend fun fetchTrendingMovies(): List<MovieResult> {

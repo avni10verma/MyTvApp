@@ -13,7 +13,7 @@
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="258dp">
 
 
         <androidx.viewpager.widget.ViewPager
@@ -21,16 +21,6 @@
             android:layout_width="match_parent"
             android:layout_height="253dp"
             android:layout_marginBottom="16dp" />
-
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabLayout"
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            app:layout_anchor="@+id/view_pager_movie_banners"
-            app:layout_anchorGravity="bottom|center"
-            app:tabIndicatorColor="@color/white"
-            app:tabSelectedTextColor="@color/white"
-            app:tabTextColor="@color/gray" />
 
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

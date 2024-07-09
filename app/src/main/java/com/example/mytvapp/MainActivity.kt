@@ -1,5 +1,6 @@
 package com.example.mytvapp
 
+import SearchFragment
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -25,7 +26,7 @@ class MainActivity : AppCompatActivity() {
                 replace(R.id.fragment_container, SearchFragment())
                 addToBackStack(null)
             }
-        }
+       }
     }
 }
 

@@ -63,6 +63,18 @@ class MainFragment : Fragment() {
         return view
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        containerLayout.post {
+            val firstRecyclerView = containerLayout.findViewById<RecyclerView>(R.id.recycler_view_posters)
+            firstRecyclerView?.post {
+                firstRecyclerView.findViewHolderForAdapterPosition(0)?.itemView?.requestFocus()
+            }
+        }
+    }
+
+
+
     private fun addCategoryView(title: String, movies: List<MovieResult>, aspectRatio: Float) {
         Log.d("Avniii", title)
 

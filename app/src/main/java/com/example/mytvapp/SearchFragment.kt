@@ -2,6 +2,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -67,8 +68,22 @@ class SearchFragment : Fragment() {
                 }
             }
         })
-
-
-
     }
+    private fun setupKeyListeners() {
+        searchView.setOnKeyListener { view, keyCode, event ->
+            if (event.action == KeyEvent.ACTION_DOWN) {
+                when (keyCode) {
+                    KeyEvent.KEYCODE_DPAD_DOWN -> {
+                        if (moviePosterAdapter.itemCount > 0) {
+                            recyclerViewSearchResults.findViewHolderForAdapterPosition(0)?.itemView?.requestFocus()
+                            return@setOnKeyListener true
+                        }
+                    }
+                }
+            }
+            false
+        }
+    }
+
+
 }

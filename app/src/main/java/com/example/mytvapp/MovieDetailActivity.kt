@@ -21,6 +21,7 @@ class MovieDetailActivity : AppCompatActivity() {
                 arguments = Bundle().apply {
                     Log.d("fragment","title passed to fragment")
                     putString("MOVIE_TITLE", movieTitle)
+
                     putString("MOVIE_OVERVIEW", movieOverview)
                     putString("MOVIE_POSTER", moviePoster)
                 }

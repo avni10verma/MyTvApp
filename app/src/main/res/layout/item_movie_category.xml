@@ -12,10 +12,7 @@
         android:text="Recommended Movies"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:layout_marginBottom="4dp"
-        android:focusable="true"
-        android:background="@drawable/item_background"
-        android:focusableInTouchMode="true" />
+        android:layout_marginBottom="4dp" />
 
 
     <androidx.recyclerview.widget.RecyclerView

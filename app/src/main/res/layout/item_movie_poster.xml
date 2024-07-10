@@ -6,7 +6,7 @@
     android:focusable="true"
     android:background="@drawable/item_background"
     android:orientation="vertical"
-    android:layout_margin="4dp">
+    android:layout_margin="8dp">
 
     <com.example.mytvapp.AspectRatioImageView
         android:id="@+id/image_view_poster"

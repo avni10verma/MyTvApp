@@ -57,15 +57,6 @@ class MovieFragment : Fragment() {
         return view
     }
 
-
-    companion object {
-        @JvmStatic
-        fun newInstance() = MovieFragment().apply {
-            arguments = Bundle().apply {
-                // Add any arguments if necessary
-            }
-        }
-    }
 }
 
     

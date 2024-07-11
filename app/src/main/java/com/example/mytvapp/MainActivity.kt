@@ -33,6 +33,9 @@ class MainActivity : AppCompatActivity() {
         searchB.setOnKeyListener(focusKeyListener)
         settingsButton.setOnKeyListener(focusKeyListener)
 
+
+
+
         homeButton.requestFocus()
 
 

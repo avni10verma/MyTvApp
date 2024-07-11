@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -24,6 +25,7 @@ class SearchFragment : Fragment() {
 
     private lateinit var searchView: EditText
     private lateinit var recyclerViewSearchResults: RecyclerView
+    private lateinit var homebutton :TextView
     private val movieViewModel: MovieViewModel by viewModels {
         MovieViewModelFactory(com.example.data.repository.MovieRepositoryImpl(MovieApiService.create()))
     }
@@ -38,11 +40,13 @@ class SearchFragment : Fragment() {
         searchView = view.findViewById(R.id.search_view)
         recyclerViewSearchResults = view.findViewById(R.id.recycler_view_search_results)
 
+
         recyclerViewSearchResults.layoutManager = GridLayoutManager(context, 5)
         moviePosterAdapter = MoviePosterAdapter(emptyList(),16f/9f)
         recyclerViewSearchResults.adapter = moviePosterAdapter
 
         setupSearchView()
+        setupKeyListeners()
 
         return view
     }
@@ -78,6 +82,10 @@ class SearchFragment : Fragment() {
                             recyclerViewSearchResults.findViewHolderForAdapterPosition(0)?.itemView?.requestFocus()
                             return@setOnKeyListener true
                         }
+                    }
+                    KeyEvent.KEYCODE_DPAD_UP ->{
+                        homebutton.requestFocus()
+                        return@setOnKeyListener true
                     }
                 }
             }

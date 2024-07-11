@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="38dp"
-        android:background="#787878"
+        android:background="@drawable/item_background"
         android:focusable="true"
         android:text=" Watch Now "
         android:textSize="14dp"

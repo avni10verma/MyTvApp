@@ -10,7 +10,7 @@ import androidx.compose.ui.util.trace
 import androidx.fragment.app.commit
 import androidx.lifecycle.ViewModelProvider
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() , FocusInterface {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,21 +34,28 @@ class MainActivity : AppCompatActivity() {
         settingsButton.setOnKeyListener(focusKeyListener)
 
 
-
-
         homeButton.requestFocus()
 
 
-        val searchButton : View = findViewById(R.id.search_button)
+        val searchButton: View = findViewById(R.id.search_button)
         searchButton.setOnClickListener {
-            Log.d("searchf","Opened")
+            Log.d("searchf", "Opened")
             supportFragmentManager.commit {
                 replace(R.id.fragment_container, SearchFragment())
                 addToBackStack(null)
             }
-       }
-    }
+        }
 
+        val apps: View = findViewById(R.id.apps)
+        apps.setOnClickListener {
+            supportFragmentManager.commit {
+                replace(R.id.fragment_container, InstalledAppsFragment())
+                addToBackStack(null)
+            }
+        }
+
+
+    }
 
     private val focusKeyListener = View.OnKeyListener { view, keyCode, event ->
         if (event.action == KeyEvent.ACTION_DOWN) {
@@ -59,17 +66,21 @@ class MainActivity : AppCompatActivity() {
                             // Do nothing
                             true
                         }
+
                         KeyEvent.KEYCODE_DPAD_DOWN -> {
                             // Do nothing
                             true
                         }
+
                         KeyEvent.KEYCODE_DPAD_RIGHT -> {
                             findViewById<View>(R.id.home).requestFocus()
                             true
                         }
+
                         else -> false
                     }
                 }
+
                 R.id.settings_button -> {
                     if (keyCode == KeyEvent.KEYCODE_DPAD_RIGHT) {
                         true
@@ -77,13 +88,27 @@ class MainActivity : AppCompatActivity() {
                         false
                     }
                 }
+
                 else -> false
             }
         } else {
             true
         }
     }
+
+
+    override fun onFocusUp(view: View) {
+        when (view.id) {
+            R.id.search_button -> findViewById<View>(R.id.home).requestFocus()
+            R.id.recycler_view_installed_apps ->findViewById<View>(R.id.home).requestFocus()
+        }
+    }
+
+    override fun onFocusDown(view: View) {}
+    override fun onFocusLeft(view: View) {}
+    override fun onFocusRight(view: View) {}
 }
+
 
 
 

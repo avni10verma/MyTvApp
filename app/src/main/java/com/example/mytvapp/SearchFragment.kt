@@ -1,3 +1,4 @@
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.data.interfaces.MovieApiService
 import com.example.data.repository.MovieRepositoryImpl
+import com.example.mytvapp.FocusInterface
 import com.example.mytvapp.MoviePosterAdapter
 import com.example.mytvapp.MovieViewModel
 import com.example.mytvapp.MovieViewModelFactory
@@ -26,6 +28,8 @@ class SearchFragment : Fragment() {
     private lateinit var searchView: EditText
     private lateinit var recyclerViewSearchResults: RecyclerView
     private lateinit var homebutton :TextView
+    private var focusInterface: FocusInterface? = null
+
     private val movieViewModel: MovieViewModel by viewModels {
         MovieViewModelFactory(com.example.data.repository.MovieRepositoryImpl(MovieApiService.create()))
     }
@@ -51,6 +55,20 @@ class SearchFragment : Fragment() {
         return view
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is FocusInterface) {
+            focusInterface = context
+        } else {
+            throw ClassCastException("$context must implement FocusHandler")
+        }
+    }
+    override fun onDetach() {
+        super.onDetach()
+        focusInterface = null
+    }
+
+
     private fun setupSearchView() {
         searchView.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -73,6 +91,7 @@ class SearchFragment : Fragment() {
             }
         })
     }
+
     private fun setupKeyListeners() {
         searchView.setOnKeyListener { view, keyCode, event ->
             if (event.action == KeyEvent.ACTION_DOWN) {
@@ -84,7 +103,8 @@ class SearchFragment : Fragment() {
                         }
                     }
                     KeyEvent.KEYCODE_DPAD_UP ->{
-                        homebutton.requestFocus()
+                        Log.d("UpPressed", "The focus Goes on Home")
+                        focusInterface?.onFocusUp(view)
                         return@setOnKeyListener true
                     }
                 }

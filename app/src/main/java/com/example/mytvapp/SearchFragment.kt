@@ -31,7 +31,7 @@ class SearchFragment : Fragment() {
     private var focusInterface: FocusInterface? = null
 
     private val movieViewModel: MovieViewModel by viewModels {
-        MovieViewModelFactory(com.example.data.repository.MovieRepositoryImpl(MovieApiService.create()))
+        MovieViewModelFactory(com.example.data.repository.MovieRepositoryImpl(MovieApiService.create(),requireContext()))
     }
 
     private lateinit var moviePosterAdapter: MoviePosterAdapter

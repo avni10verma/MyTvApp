@@ -23,7 +23,7 @@ class MainFragment : Fragment() {
     private lateinit var containerLayout: LinearLayout
 
     private val movieViewModel: MovieViewModel by viewModels {
-        MovieViewModelFactory(com.example.data.repository.MovieRepositoryImpl(MovieApiService.create()))
+        MovieViewModelFactory(com.example.data.repository.MovieRepositoryImpl(MovieApiService.create() ,requireContext()))
     }
 
     override fun onCreateView(
@@ -61,7 +61,11 @@ class MainFragment : Fragment() {
             }
         }
         return view
+
     }
+
+
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

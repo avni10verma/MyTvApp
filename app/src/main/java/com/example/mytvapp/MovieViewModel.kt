@@ -43,4 +43,14 @@ class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
         Log.d("Search", "Immediate search query: $query")
         _searchResults.postValue(repository.searchMovies(query))
     }
+
+    fun getAllMoviesFromDb() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val dbMovies = repository.getAllMoviesFromDb()
+            // Handle dbMovies as needed
+        }
+    }
+
+
+
 }

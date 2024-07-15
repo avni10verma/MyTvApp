@@ -54,6 +54,22 @@ class MainActivity : AppCompatActivity() , FocusInterface {
             }
         }
 
+        fun navigateToHomeFragment(){
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container,MainFragment())
+                .addToBackStack(null)
+                .commit()
+        }
+
+        homeButton.setOnKeyListener { view, keyCode, event ->
+            if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_DPAD_CENTER) {
+                navigateToHomeFragment()
+                true
+            } else {
+                false
+            }
+        }
+
 
     }
 

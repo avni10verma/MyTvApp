@@ -26,7 +26,7 @@ class ViewPagerAdapter(
         val view = LayoutInflater.from(context).inflate(R.layout.item_view_pager, container, false)
         val imageView: ImageView = view.findViewById(R.id.image_view)
         val movie = movieList[position]
-        Glide.with(context).load("https://image.tmdb.org/t/p/w500${movie[1].backdrop_path}").into(imageView)
+        Glide.with(context).load("https://image.tmdb.org/t/p/w500${movie[1].poster_path}").into(imageView)
 
         val watchNowButton: Button = view.findViewById(R.id.watch_now_button)
 
